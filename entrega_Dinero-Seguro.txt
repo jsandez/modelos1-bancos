@@ -1,0 +1,15 @@
+- Impresión inicial del problema
+
+Un camión de caudales debe entregar y recibir dinero de diferentes sucursales bancarias.
+Sale de la central vacío y en ningún momento la carga puede superar un importe definido (tampoco ser negativa).
+Se busca encontrar el recorrido más corto pasando por todas las sucursales.
+
+- Ideas
+Se creo un archivo parser de forma de poder extraer toda la info del archivo de entrada en diferentes estructuras que nos serviran para operar y obtener un resultado.
+La idea que se tuvo fue la de recorrer el primer camino posible iterando entre las diferentes sucursales. 
+Siempre y cuando la combinacion no rompa las restricciones mencionadas como que la capacidad del cambion sea entre 0 y 30.
+El archivo de salida output.txt tiene el formato que se espera de las sucursales.
+
+- Comentarios
+Esta idea si bien no es la mejor, ha resuelto el problema de forma veloz. Aun asi se intentara mejorar la misma con otro tipo de algoritmos.
+
