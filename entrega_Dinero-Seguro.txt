@@ -10,6 +10,9 @@ La idea que se tuvo fue la de recorrer el primer camino posible iterando entre l
 Siempre y cuando la combinacion no rompa las restricciones mencionadas como que la capacidad del cambion sea entre 0 y 30.
 El archivo de salida output.txt tiene el formato que se espera de las sucursales.
 
+- Problemas surgidos
+Un problema que surgio por la naturaleza del algoritmo, es que no tomaba en cuenta si la primer sucursal tenia demanda negativa, por lo que la solucion era invalida. Esto se corrigio verificando esta condicion y sumando una lista vacia en dicho caso a la lista de soluciones propuestas.
+
 - Comentarios
 Esta idea si bien no es la mejor, ha resuelto el problema de forma veloz. Aun asi se intentara mejorar la misma con otro tipo de algoritmos.
 
