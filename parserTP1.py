@@ -15,14 +15,14 @@ def getData(path):
 	i, j = dimension, dimension
 	X = [0 for x in range(i)]
 	Y = [0 for y in range(j)]
-	dimensiones = [0 for x in range(i)]
+	demandas = [0 for x in range(i)]
 	matrix = [[0 for x in range(i)] for y in range(j)]
 
 	# CARGANDO DEMANDAS
 
 	for i in range(indexDemandas + 1, indexFinDemandas, 1):
 		line = lines[i].split(' ')
-		dimensiones[int(line[0])-1]=int(line[1])
+		demandas[int(line[0])-1]=int(line[1])
 
 	# CARGANDO DISTANCIAS
 
@@ -38,5 +38,5 @@ def getData(path):
 			else:
 				matrix[i][j] = math.sqrt(pow(X[i]-X[j],2) + pow(Y[i]-Y[j],2))
 
-	return capacidad, dimension, dimensiones, matrix
+	return capacidad, dimension, demandas, matrix
 
