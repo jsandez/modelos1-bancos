@@ -69,18 +69,14 @@ def createOutput():
 
 	while (len(secuencia) < dimension):
 		print("Iteracion: {}".format(len(secuencia)))
+
 		acum = 0
 		for i in secuencia:
 		 	acum += demandas[i-1]
-		#print("arranca noVisitados")
-		#noVisitados = {i + 1 for i in range(dimension) if i + 1 not in secuencia}
-		print("arranca demandasTep")
+
 		demandasTemp = {value: acum + demandas[value - 1] for value in noVisitados}
-		print("arranca demandasTempFiltradas")
 		demandasTempFiltradas = dict(filter(lambda x: x[1] >= 0 and x[1] <= capacidad and x[0] in noVisitados, demandasTemp.items()))
-		print("arranca distanciasDemandasFiltradas")
 		distanciasDemandasFiltradas = {index: matrix[secuencia[-1] - 1][index - 1] for index, value in demandasTempFiltradas.items()}
-		print("arranca minimoPar")
 		minimoPar = min(distanciasDemandasFiltradas.items(), key = lambda x: x[1])
 		noVisitados.remove(minimoPar[0])
 		secuencia.append(minimoPar[0])
