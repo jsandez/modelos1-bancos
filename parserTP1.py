@@ -1,12 +1,21 @@
 import math
+import json
+import sys
 
-def getData(path):
-	file1 = open(path,'r')
-
+def createInputFiles():
+	file1 = open(sys.argv[1],'r')
 	lines = list(map(lambda x: x.strip(), file1.readlines()))
 	file1.close()
+
 	capacidad = int(lines[0].split(':')[1].strip())
+	capacidadOut = open("capacidad.json",'w')
+	json.dump(capacidad,capacidadOut)
+	capacidadOut.close()
+	
 	dimension = int(lines[1].split(':')[1].strip())
+	dimensionOut = open("dimension.json",'w')
+	json.dump(dimension,dimensionOut)
+	dimensionOut.close()
 
 	indexCoordenadas = lines.index("NODE_COORD_SECTION")
 	indexDemandas = lines.index("DEMANDAS")
@@ -24,6 +33,10 @@ def getData(path):
 		line = lines[i].split(' ')
 		demandas[int(line[0])-1]=int(line[1])
 
+	demandasOut = open("demandas.json",'w')
+	json.dump(demandas,demandasOut)
+	demandasOut.close()
+	
 	# CARGANDO DISTANCIAS
 
 	for i in range(indexCoordenadas + 1, len(lines) - 1,1):
@@ -38,5 +51,8 @@ def getData(path):
 			else:
 				matrix[i][j] = math.sqrt(pow(X[i]-X[j],2) + pow(Y[i]-Y[j],2))
 
-	return capacidad, dimension, demandas, matrix
+	matrixOut = open("matrix.json",'w')
+	json.dump(matrix,matrixOut)
+	matrixOut.close()
 
+createInputFiles()
