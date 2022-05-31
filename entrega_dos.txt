@@ -4,8 +4,8 @@ Ver PDF "TP1-20221C-92190.pdf" agregado en repositorio.
 
 - Experiencia con la segunda instancia
 
-En esta instancia vemos que los datos d eentrada son de ordenes de  magnitud muchisimo mas grande que el anterior, 
-por lo que trajo muchos problemas en cuestión de parseo y procesamiento de los datos
+En esta instancia vemos que los datos de entrada tienen ordenes de magnitud superior 
+a la anterior instancia, por lo que trajo muchos problemas en cuestión de parseo y procesamiento de los datos
 
 - Comentarios acerca de cambio de código:
 
@@ -13,6 +13,13 @@ Se intento resolver este problema de la misma forma que el anterior, pero en est
 toda la información de la matriz de distancias entre las sucursales en memoria dinámica, por lo que se opto cambiar
 el archivo de parserTP1 a un archivo que genera 4 archivos json, uno por cada uno de los parametros que debemos 
 extraer del archivo "problema_dos.txt".
+
+Ademas, se realizaron cambios de codigo en cuanto a la forma de resolver este problema,
+ya que para obtener el minimo, primero se busca el minimo entre dos sucursales cualesquiera
+siempre y cuando la primera tenga demanda positiva y la suma entre las demandas de la primera
+y la segunda esten en los limites del problema. Luego a partir del segundo elemento,
+se realiza la busqueda de la minima distancia en la matriz de distancias, y asi hasta
+que lleguemos al final de todo.
 
 No se subira al repositorio estos archivos .json ya que el tamaño de la  matriz (casi 7 gb) 
 es muy grande y sería innecesario esta información, ya que se puede generar con el archivo parserTP1 de la siguiente
