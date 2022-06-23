@@ -23,20 +23,19 @@ def getData():
 	except:
 		print("falta cargar los archivos de entrada")
 
-def minimoConDemandasValidas(demandas, dimension, matrix, minX, capacidad):
-	demandasMinX = {index + 1: demandas[minX - 1] + demandas[index] for index, value in enumerate(range(dimension))}
-	demandasMinXFiltradas = dict(filter(lambda x: x[1] >= 0 and x[1] <= capacidad and x[0] != minX, demandasMinX.items()))
-	distanciasDemandasFiltradas = {index: matrix[minX -1][index - 1] for index, value in demandasMinXFiltradas.items()}
-	return min(distanciasDemandasFiltradas.items(), key = lambda x: x[1])
+def minimoConDemandasValidas(dimension, matrix, minX):
+	distancias = {index +1: matrix[minX -1][index] for index in (range(dimension))}
+	distanciasFilterZero = dict(filter(lambda x: x[1] > 0, distancias.items()))
+	return min(distanciasFilterZero.items(), key = lambda x: x[1])
 
-def getSucursalesIniciales(demandas, dimension, capacidad, matrix, sucDemPositiva):
-	minX = list(sucDemPositiva)[0]
-	minimoPar = minimoConDemandasValidas(demandas, dimension, matrix, minX, capacidad)
+def getSucursalesIniciales(dimension, matrix, sucursales):
+	minX = list(sucursales)[0]
+	minimoPar = minimoConDemandasValidas(dimension, matrix, minX)
 	minimo = minimoPar[1]
 	minY = minimoPar[0]
 
-	for i in sucDemPositiva:
-		minimoPar = minimoConDemandasValidas(demandas, dimension, matrix, i, capacidad)
+	for i in sucursales:
+		minimoPar = minimoConDemandasValidas(dimension, matrix, i)
 		
 		if (minimoPar[1] < minimo):
 			minimo = minimoPar[1]
@@ -49,14 +48,12 @@ def getSucursalesIniciales(demandas, dimension, capacidad, matrix, sucDemPositiv
 def createOutput():
 	capacidad, dimension, demandas, matrix = getData()
 
-	mapaDemandas =  {index + 1: value for index, value in enumerate(demandas)}
-
-	sucDemPositiva = dict(filter(lambda x: x[1] >= 0, mapaDemandas.items()))
+	sucursales =  {index + 1 for index in range(dimension)}
 
 	secuencia = []
 
 	print("Buscando dos primeras sucursales")
-	minimo, minX, minY = getSucursalesIniciales(demandas, dimension, capacidad, matrix, sucDemPositiva.keys())
+	minimo, minX, minY = getSucursalesIniciales(dimension, matrix, sucursales)
 
 	print("La minima distancia es {} y pasa en X: {} e Y: {}".format(minimo, minX, minY))
 	secuencia.append(minX)
@@ -70,14 +67,9 @@ def createOutput():
 	while (len(secuencia) < dimension):
 		print("Iteracion: {}".format(len(secuencia)))
 
-		acum = 0
-		for i in secuencia:
-		 	acum += demandas[i-1]
-
-		demandasTemp = {value: acum + demandas[value - 1] for value in noVisitados}
-		demandasTempFiltradas = dict(filter(lambda x: x[1] >= 0 and x[1] <= capacidad and x[0] in noVisitados, demandasTemp.items()))
-		distanciasDemandasFiltradas = {index: matrix[secuencia[-1] - 1][index - 1] for index, value in demandasTempFiltradas.items()}
-		minimoPar = min(distanciasDemandasFiltradas.items(), key = lambda x: x[1])
+		distancias = {index: matrix[secuencia[-1] - 1][index - 1] for index in noVisitados}
+		distanciasFilterZero = dict(filter(lambda x: x[1] > 0, distancias.items()))
+		minimoPar = min(distanciasFilterZero.items(), key = lambda x: x[1])
 		noVisitados.remove(minimoPar[0])
 		secuencia.append(minimoPar[0])
 
