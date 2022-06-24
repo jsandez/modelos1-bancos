@@ -1,7 +1,3 @@
-- Modelo matemático para resolver el problema (mediante programación lineal entera)
-
-Ver PDF "TP1-20221C-92190.pdf" agregado en repositorio.
-
 - Experiencia con la tercera instancia
 
 En esta instancia volvemos a ejecutar el trabajo pero con 100 sucursales, para que la solución que se
